@@ -1,0 +1,8 @@
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PhotoActivity"
+    android:id="@+id/fragment_photo"
+    android:name="io.elapse.unsplash.PhotoFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+

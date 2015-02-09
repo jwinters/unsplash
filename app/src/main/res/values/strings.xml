@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">UNSPLASH</string>
+    <string name="loading">LOADING…</string>
+    <string name="photo">PHOTO</string>
+
+    <string name="no">NO</string>
+    <string name="photos">PHOTOS</string>
+    <string name="found">FOUND</string>
+</resources>

@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".PhotosActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:padding="40dp">
+
+    <TextView
+        android:id="@+id/empty_text_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:textColor="@color/text_dark"
+        android:text="@string/no" />
+
+    <TextView
+        android:id="@+id/empty_text_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:textColor="@color/text_dark"
+        android:text="@string/photos" />
+
+    <TextView
+        android:id="@+id/empty_text_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:textColor="@color/text_dark"
+        android:text="@string/found" />
+
+</LinearLayout>

@@ -1,0 +1,8 @@
+<resources>
+
+    <color name="text_dark">#333</color>
+    <color name="background_white">#fff</color>
+    <color name="background_dark">#cc000000</color>
+    <color name="selector_white">#77ffffff</color>
+
+</resources>
