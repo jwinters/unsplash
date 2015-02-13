@@ -2,6 +2,7 @@ package io.elapse.unsplash;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,11 +50,17 @@ public class PhotosFragment extends ArcaAdapterFragment implements AdapterView.O
     }
 
     private void selectPhoto(final View view, final String url) {
-        hidePhoto(view);
 
         final int[] info = ViewUtils.getInfo(view);
 
         PhotoActivity.newInstance(getActivity(), url, info);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                hidePhoto(view);
+            }
+        }, 100);
     }
 
     @Override
