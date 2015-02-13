@@ -29,7 +29,7 @@ public class UnsplashContentProvider extends DatabaseProvider {
     public static class PhotoTable extends SQLiteTable {
         public static interface Columns extends SQLiteTable.Columns {
 
-            @Unique(Unique.OnConflict.REPLACE)
+            @Unique(Unique.OnConflict.IGNORE)
             @Column(Column.Type.TEXT)
             public static final String URL = "url";
 

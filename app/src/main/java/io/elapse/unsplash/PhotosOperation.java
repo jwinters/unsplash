@@ -3,9 +3,11 @@ package io.elapse.unsplash;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Parcel;
 
 import io.pivotal.arca.provider.DataUtils;
+import io.pivotal.arca.service.OperationService;
 import io.pivotal.arca.service.SimpleOperation;
 import io.pivotal.arca.utils.Logger;
 
@@ -33,7 +35,7 @@ public class PhotosOperation extends SimpleOperation {
     public ContentValues[] onExecute(final Context context) throws Exception {
         final Photos photos = UnsplashApi.getPhotos(mPage);
 
-        Logger.v("Found " + photos.size() + " photos.");
+        Logger.v("Found " + photos.size() + " new photos.");
 
         return DataUtils.getContentValues(photos);
     }
@@ -51,7 +53,23 @@ public class PhotosOperation extends SimpleOperation {
 
         Logger.v("Inserted " + inserted + " photos.");
 
+        final Cursor cursor = resolver.query(getUri(), null, null, null, null);
+        final int count = cursor.getCount();
+        cursor.close();
+
+        Logger.v("Found " + count + " photos after insert.");
+
         if (inserted == 0) {
+            Logger.v("Moving on to next page.");
+            OperationService.start(context, new PhotosOperation(mPage + 1));
+
+            throw new RuntimeException();
+        }
+
+        if (count % 10 != 0) {
+            Logger.v("Starting pagination over.");
+            OperationService.start(context, new PhotosOperation(1));
+
             throw new RuntimeException();
         }
     }
