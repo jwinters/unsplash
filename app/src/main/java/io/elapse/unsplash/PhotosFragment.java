@@ -29,6 +29,8 @@ public class PhotosFragment extends ArcaAdapterFragment implements AdapterView.O
 
     private ArcaViewManager mManager;
 
+    private View mSelectedView;
+
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_photos, container, false);
@@ -39,8 +41,15 @@ public class PhotosFragment extends ArcaAdapterFragment implements AdapterView.O
 
     @Override
     public void onItemClick(final AdapterView<?> parent, final View view, final int position, final long id) {
+
         final Cursor cursor = (Cursor) parent.getItemAtPosition(position);
         final String url = cursor.getString(cursor.getColumnIndex(PhotoTable.Columns.URL));
+
+        selectPhoto(view, url);
+    }
+
+    private void selectPhoto(final View view, final String url) {
+        hidePhoto(view);
 
         final int[] info = ViewUtils.getInfo(view);
 
@@ -79,5 +88,23 @@ public class PhotosFragment extends ArcaAdapterFragment implements AdapterView.O
     @Override
     public void onContentError(final Error error) {
         mManager.checkError(error);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        unhidePhoto();
+    }
+
+    private void unhidePhoto() {
+        if (mSelectedView != null) {
+            mSelectedView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void hidePhoto(final View view) {
+        mSelectedView = view;
+        mSelectedView.setVisibility(View.INVISIBLE);
     }
 }
