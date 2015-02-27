@@ -13,6 +13,7 @@ import android.widget.CursorAdapter;
 import java.util.Arrays;
 import java.util.Collection;
 
+import io.elapse.unsplash.PhotosAdapter.ViewType;
 import io.elapse.unsplash.UnsplashContentProvider.PhotoTable;
 import io.pivotal.arca.adapters.Binding;
 import io.pivotal.arca.dispatcher.Error;
@@ -24,13 +25,12 @@ import io.pivotal.arca.monitor.ArcaDispatcher;
 public class PhotosFragment extends ArcaAdapterFragment implements AdapterView.OnItemClickListener {
 
     private static final Collection<Binding> BINDINGS = Arrays.asList(
-        PhotosAdapter.ViewType.DEFAULT.newBinding(R.id.photo_image, PhotoTable.Columns.URL),
-        PhotosAdapter.ViewType.LOADING.newBinding(R.id.photo_loading, PhotoTable.Columns._ID)
+            ViewType.DEFAULT.newBinding(R.id.photo_image, PhotoTable.Columns.URL),
+            ViewType.LOADING.newBinding(R.id.photo_loading, PhotoTable.Columns._ID)
     );
 
-    private ArcaViewManager mManager;
-
     private View mSelectedView;
+    private ArcaViewManager mManager;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -45,16 +45,20 @@ public class PhotosFragment extends ArcaAdapterFragment implements AdapterView.O
 
         final Cursor cursor = (Cursor) parent.getItemAtPosition(position);
         final String url = cursor.getString(cursor.getColumnIndex(PhotoTable.Columns.URL));
+        final String byLine = cursor.getString(cursor.getColumnIndex(PhotoTable.Columns.BY_LINE));
 
-        selectPhoto(view, url);
+        selectPhoto(view, url, byLine);
     }
 
-    private void selectPhoto(final View view, final String url) {
+    private void selectPhoto(final View view, final String url, final String byLine) {
 
         final int[] info = ViewUtils.getInfo(view);
+        PhotoActivity.newInstance(getActivity(), url, info, byLine);
 
-        PhotoActivity.newInstance(getActivity(), url, info);
+        hidePhotoDelayed(view);
+    }
 
+    private void hidePhotoDelayed(final View view) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

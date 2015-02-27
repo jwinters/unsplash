@@ -45,11 +45,12 @@ public class UnsplashApi {
     private static Photo getPhoto(final Element element) {
         final String fullSrc = element.attr("src");
         final String src = fullSrc.substring(0, fullSrc.indexOf("?"));
+        final String byLine = element.attr("alt");
         final String dataWidth = element.attr("data-width");
         final String dataHeight = element.attr("data-height");
 
-        Logger.v("%s, %s, %s", src, dataWidth, dataHeight);
+        Logger.v("%s, %s, %s, %s", src, byLine, dataWidth, dataHeight);
 
-        return new Photo(src, dataWidth, dataHeight);
+        return new Photo(src, byLine, dataWidth, dataHeight);
     }
 }

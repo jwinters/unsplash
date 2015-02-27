@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -22,6 +24,7 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
 
     private View mContainer;
     private ImageView mImageView;
+    private TextView mTextView;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -34,6 +37,7 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
 
         mContainer = view.findViewById(R.id.photo_container);
         mImageView = (ImageView) view.findViewById(R.id.photo_image);
+        mTextView = (TextView) view.findViewById(R.id.photo_by_line);
 
         final TransitionDrawable transition = (TransitionDrawable) view.getBackground();
         transition.startTransition(400);
@@ -41,12 +45,16 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
         view.setOnClickListener(this);
     }
 
-    public void setImageDetails(final String url, final int[] info) {
+    public void setImageDetails(final String url, final int[] info, final String byLine) {
         final LayoutParams containerParams = getLayoutParams(info);
-        final AnimationSet animation = getAnimation(containerParams);
+        final AnimationSet photoAnimation = getPhotoAnimation(containerParams);
+        final Animation textAnimation = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
 
         mContainer.setLayoutParams(containerParams);
-        mContainer.startAnimation(animation);
+        mContainer.startAnimation(photoAnimation);
+
+        mTextView.setText(byLine);
+        mTextView.startAnimation(textAnimation);
 
         final String urlSized = String.format("%s?w=400&h=400", url);
         Picasso.with(mImageView.getContext()).load(urlSized).into(mImageView);
@@ -61,7 +69,7 @@ public class PhotoFragment extends Fragment implements View.OnClickListener {
         return containerParams;
     }
 
-    private AnimationSet getAnimation(final LayoutParams containerParams) {
+    private AnimationSet getPhotoAnimation(final LayoutParams containerParams) {
         final Point size = getWindowSize();
         final float viewWidth = containerParams.width;
         final float viewHeight = containerParams.height;

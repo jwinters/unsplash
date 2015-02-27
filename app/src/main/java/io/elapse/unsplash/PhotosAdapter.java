@@ -45,15 +45,20 @@ public class PhotosAdapter extends ModernCursorAdapter {
         if (position < getCount() - 1) {
             return super.getView(position, convertView, parent);
         } else {
-            final int page = position / 10 + 1;
-            final Operation operation = new PhotosOperation(page);
-
             final Context context = parent.getContext();
-            OperationService.start(context, operation);
+
+            startOperation(context, position);
 
             final LayoutInflater inflater = LayoutInflater.from(context);
             return inflater.inflate(ViewType.LOADING.getLayout(), parent, false);
         }
+    }
+
+    private void startOperation(final Context context, final int position) {
+        final int page = position / 10 + 1;
+        final Operation operation = new PhotosOperation(page);
+
+        OperationService.start(context, operation);
     }
 
     private ViewType getViewType(final int position) {

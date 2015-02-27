@@ -33,6 +33,9 @@ public class UnsplashContentProvider extends DatabaseProvider {
             @Column(Column.Type.TEXT)
             public static final String URL = "url";
 
+            @Column(Column.Type.TEXT)
+            public static final String BY_LINE = "by_line";
+
             @Column(Column.Type.INTEGER)
             public static final String WIDTH = "width";
 

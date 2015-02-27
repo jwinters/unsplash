@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.elapse.unsplash">
+    package="io.elapse.unsplash"
+    android:versionCode="2">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".UnsplashApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/unsplash_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="io.elapse.unsplash.LauncherActivity"
+            android:name=".LauncherActivity"
             android:noHistory="true"
             android:label="@string/app_name">
             <intent-filter>
@@ -22,11 +23,11 @@
         </activity>
 
         <activity
-            android:name="io.elapse.unsplash.PhotosActivity"
+            android:name=".PhotosActivity"
             android:label="@string/app_name" />
 
         <activity
-            android:name="io.elapse.unsplash.PhotoActivity"
+            android:name=".PhotoActivity"
             android:theme="@style/AppTheme.Fullscreen"
             android:label="@string/app_name" />
 

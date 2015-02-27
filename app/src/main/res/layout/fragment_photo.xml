@@ -19,4 +19,20 @@
             android:layout_margin="5dp"
             android:scaleType="centerCrop" />
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/photo_by_line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:typeface="serif"
+        android:fontFamily="serif"
+        android:textSize="18sp"
+        android:textColor="#fff"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="30dp"/>
+
 </RelativeLayout>
