@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">UNSPLASH</string>
+    <string name="unofficial">UNOFFICIAL</string>
+
     <string name="loading">LOADING…</string>
     <string name="photo">PHOTO</string>
 
