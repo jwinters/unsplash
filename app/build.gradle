@@ -15,7 +15,7 @@ dependencies {
     compile 'org.jsoup:jsoup:1.7.2'
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.squareup.picasso:picasso:2.4.0'
-    compile('io.pivotal:arca:1.0-beta.3') {
+    compile('io.pivotal:arca:1.0-beta.4-SNAPSHOT') {
         exclude group: 'com.android.support'
     }
 }
